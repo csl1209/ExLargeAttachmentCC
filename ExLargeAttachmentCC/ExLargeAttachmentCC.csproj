@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common">
+      <HintPath>..\..\..\..\BetterNext\BetterHoster\dll\Common.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -62,6 +65,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ashx\Admin.ashx.cs">
+      <DependentUpon>Admin.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Ashx\Version.ashx.cs">
+      <DependentUpon>Version.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Head.Master.cs">
       <DependentUpon>Head.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -80,6 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Head.Master" />
+    <Content Include="Ashx\Version.ashx" />
+    <Content Include="Ashx\Admin.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -87,8 +98,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Ashx\" />
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{925b091e-0d01-4a04-8d45-137c13d888d3}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Manager\Manager.csproj">
+      <Project>{544c4852-aa48-4687-a570-34feaf41e7f0}</Project>
+      <Name>Manager</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

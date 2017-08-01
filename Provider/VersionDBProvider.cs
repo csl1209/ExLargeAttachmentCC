@@ -388,5 +388,56 @@ namespace Provider
             }
             return bResult;
         }
+
+        public bool CheckCurrentVersion(out VersionInfo info, out ErrorCodeInfo error)
+        {
+            bool bResult = true;
+            error = new ErrorCodeInfo();
+            info = new VersionInfo();
+            string strError = string.Empty;
+            
+            try
+            {
+                CBaseDB _db = new CBaseDB(Conntection.strConnection);
+                do
+                {
+                    //int iResult = 0;
+                    DataSet ds = new DataSet();
+                    if (!_db.ExcuteByTransaction("dbo.[prc_CheckVersion]", out ds, out strError))
+                    {
+                        strError = "prc_CheckVersion数据库执行失败,Error:" + strError;
+                        Log4netHelper.Error("VersionDBProvider调用CheckVersion异常", "", strError,Guid.Empty);
+                        error.Code = ErrorCode.SQLException;
+                        bResult = false;
+                        break;
+                    }
+                    else
+                    {
+                        if (ds.Tables.Count > 0)
+                        {
+                            foreach (DataRow dr in ds.Tables[0].Rows)
+                            {
+                                info.ID = Guid.Parse(Convert.ToString(dr["ID"]));
+                                info.VersionNum = Convert.ToString(dr["VersionNum"]);
+                                info.FileName = Convert.ToString(dr["FileName"]);
+                                info.FilePath = Convert.ToString(dr["FilePath"]);
+                                info.CreateTime = Convert.ToDateTime(dr["CreateTime"]);
+                                info.Detail = Convert.ToString(dr["Detail"]);
+                                info.Status = (VersionState)Convert.ToInt32(dr["Status"]);
+                            }
+                        }
+
+
+                    }
+                } while (false);
+            }
+            catch (Exception ex)
+            {
+                bResult = false;
+                Log4netHelper.Error("VersionDBProvider调用CheckVersion异常", "", ex.ToString(), Guid.Empty);
+                error.Code = ErrorCode.Exception;
+            }
+            return bResult;
+        }
     }
 }

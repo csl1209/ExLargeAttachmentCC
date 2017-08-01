@@ -63,6 +63,9 @@ namespace Entity
                     case ErrorCode.AccountOrPasswordError:
                         codeInfo = "账户或密码错误！";
                         break;
+                    case ErrorCode.AdminIsNotExist:
+                        codeInfo = "管理员不存在或超时！";
+                        break;
                     default:
                         break;
                 }
@@ -85,5 +88,6 @@ namespace Entity
         EnableVersionIsExist = 1002,
         AccountIsExist = 1003,
         AccountOrPasswordError = 1004,
+        AdminIsNotExist = 1005,
     }
 }

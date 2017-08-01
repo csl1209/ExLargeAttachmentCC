@@ -262,9 +262,44 @@ namespace Manager
             return true;
         }
 
-        public bool CheckVersion()
+        public bool CheckVersion(string strCurrentVersion, out string strJsonResult)
         {
-            return true;
+            bool bResult = true;
+            strJsonResult = string.Empty;
+            ErrorCodeInfo error = new ErrorCodeInfo();
+            string json = string.Empty;
+            try
+            {
+                do
+                {
+                    //参数验证
+                    if (string.IsNullOrEmpty(strCurrentVersion))
+                    {
+                        error.Code = ErrorCode.JsonRequestEmpty;
+                        bResult = false;
+                        break;
+                    }
+
+                    VersionInfo Info = new VersionInfo();
+                    VersionDBProvider provider = new VersionDBProvider();
+                    if (!provider.CheckCurrentVersion(out Info, out error))
+                    {
+                        bResult = false;
+                        break;
+                    }
+                    json = JsonConvert.SerializeObject(Info);
+
+                } while (false);
+            }
+            catch (Exception ex)
+            {
+                error.Code = ErrorCode.Exception;
+                Log4netHelper.Error("CheckVersion Exception：" + ex.ToString());
+                bResult = false;
+            }
+
+            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info, json);
+            return bResult;
         }
     }
 }
