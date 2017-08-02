@@ -68,6 +68,9 @@
     <Compile Include="Ashx\Admin.ashx.cs">
       <DependentUpon>Admin.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Ashx\Log.ashx.cs">
+      <DependentUpon>Log.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Ashx\Version.ashx.cs">
       <DependentUpon>Version.ashx</DependentUpon>
     </Compile>
@@ -91,6 +94,7 @@
     <Content Include="Head.Master" />
     <Content Include="Ashx\Version.ashx" />
     <Content Include="Ashx\Admin.ashx" />
+    <Content Include="Ashx\Log.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
