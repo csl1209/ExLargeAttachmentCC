@@ -1,21 +1,87 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Head.master.cs" Inherits="ExLargeAttachmentCC.Head" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Exchange大附件管理</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <script src="JS/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="JS/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="JS/plugins/datatables/jquery.dataTables.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="JS/plugins/bootstrap/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript">
+        function GotoTab(obj) {
+            if ($("#" + obj.id).attr("class") != "Head_Menu_Click") {
+                $("#" + obj.id).attr("class", "Head_Menu_Click");
+                $("#<%=tabNow.ClientID %>").val(obj.attributes["tag"].value);
+                $("#<%=tabchangeBT.ClientID %>").click();
+            }
+        }
+       function logoutSystem() {
+            $("#<%=logoutBT.ClientID %>").click();
+        }
+        function setCenter() {
+            var ps = GetPageSize();
+            document.getElementById("<%=content_header1.ClientID %>").style.marginLeft = (ps[2] - 960) / 2 + "px";
+            document.getElementById("<%=content_header2.ClientID %>").style.marginLeft = (ps[2] - 960) / 2 + "px";
+            document.getElementById("<%=content_body.ClientID %>").style.marginLeft = (ps[2] - 960) / 2 + "px";
+            if (ps[1] > ps[3]) {
+                document.getElementById("footer").style.top = ps[1] - 100 + "px";
+            } else {
+                document.getElementById("footer").style.top = ps[3] - 100 + "px";
+            }
+        }
+    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
-        </asp:ContentPlaceHolder>
+<body onload="setCenter()" onresize="setCenter();">
+    <form id="form1" runat="server" autocomplete="off">
+        <asp:HiddenField ID="tabNow" runat="server" Value="tab1" />
+        <asp:HiddenField ID="tab2Menu" runat="server" Value="tab2m1" />
+        <asp:HiddenField ID="tab4Menu" runat="server" Value="tab4m1" />
+        <asp:Button ID="tabchangeBT" runat="server" OnClick="GoToTab_Click" Style="display: none" />
+        <asp:Button ID="logoutBT" runat="server" OnClick="LogoutSystem_Click" Style="display: none" />
+        <div id="content_header1" runat="server" class="content_header1">
+            <img alt="" class="nav-user-photo" src="imgs/logo.jpg" style="margin-top: 17px;" />
+            <div role="navigation" class="navbar-header pull-right" style="margin-top: 17px;">
+                <ul class="nav br-nav">
+                    <li class="">
+                        <img alt="" class="nav-user-photo" src="imgs/icon_user.png" style="margin-right: 6px" />
+                        <span class="user-info">
+                            <span runat="server" id="username" class="font-size14"></span>
+                            <span runat="server" id="loginTxt" class="font-size14"></span>
+                        </span>
+                        <a href="#" class="dropdown-toggle opBtn" data-toggle="dropdown">
+                            <img alt="" src="../imgs/setup.png" />
+                        </a>
+                        <ul class="user-menu pull-right dropdown-menu">
+                            <li><a href="#" onclick="logoutSystem();">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div style="background: #38936e; width: 100%;">
+            <div id="content_header2" class="content_header2" runat="server">
+                <div id="tab1" tag="tab1" runat="server" class="Head_Menu_Normal" onclick="GotoTab(this)">版本</div>
+                <div id="tab2" tag="tab2" runat="server" class="Head_Menu_Normal" onclick="GotoTab(this)">管理员</div>
+                <div id="tab4" tag="tab4" runat="server" class="Head_Menu_Normal" onclick="GotoTab(this)">操作日志</div>
+            </div>
+        </div>
+        <div id="content_body" runat="server" class="content_body" style="width:960px;padding:0 20px;">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+    <div class="footer" id="footer" style="background-color:#fff">
+        <div class="bottom-line"></div>
+        <div><a href="#" style="position:absolute;line-height:1; margin-top:14px;color:#383838;width:100%;text-align:center;">Copyright 2012 landsea.all rights reserved 苏ICP备11027206号-1</a></div>
     </div>
+        
     </form>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+    </asp:ContentPlaceHolder>
 </body>
 </html>

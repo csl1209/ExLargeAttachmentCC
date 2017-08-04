@@ -77,7 +77,7 @@ namespace Provider
             return bResult;
         }
 
-        public bool GetOperateLogCount(Guid transactionid, out int totlecount, out ErrorCodeInfo error)
+        public bool GetOperateLogCount(Guid transactionid, string lognum, string account, DateTime starttime, DateTime endtime, out int totlecount, out ErrorCodeInfo error)
         {
             bool bResult = true;
             error = new ErrorCodeInfo();
@@ -86,12 +86,22 @@ namespace Provider
 
             try
             {
+                CParameters paras = new CParameters();
+                SqlParameter paraLogNum = new SqlParameter("@LogNum", "%" + lognum + "%");
+                SqlParameter paraAccount = new SqlParameter("@Account", "%" + account + "%");
+                SqlParameter paraStartTime = new SqlParameter("@StartTime", starttime);
+                SqlParameter paraEndTime = new SqlParameter("@EndTime", endtime);
+                paras.Add(paraLogNum);
+                paras.Add(paraAccount);
+                paras.Add(paraStartTime);
+                paras.Add(paraEndTime);
+
                 CBaseDB _db = new CBaseDB(Conntection.strConnection);
                 do
                 {
                     //int iResult = 0;
                     DataSet ds = new DataSet();
-                    if (!_db.ExcuteByTransaction("dbo.[prc_GetOperateLogCount]", out ds, out strError))
+                    if (!_db.ExcuteByTransaction(paras, "dbo.[prc_GetOperateLogCount]", out ds, out strError))
                     {
                         strError = "prc_GetOperateLogCount数据库执行失败,Error:" + strError;
                         Log4netHelper.Error("OperateLogDBProvider调用GetOperateLogCount异常", "", strError, transactionid);
@@ -101,9 +111,9 @@ namespace Provider
                     }
                     else
                     {
-                        if (ds.Tables.Count > 0)
+                        if (ds.Tables.Count > 1)
                         {
-                            totlecount = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                            totlecount = Convert.ToInt32(ds.Tables[1].Rows[0][0]);
                         }
                     }
                 } while (false);
@@ -117,11 +127,11 @@ namespace Provider
             return bResult;
         }
 
-        public bool GetOperateLogPager(Guid transactionid, int curpage, int pagesize, out List<LogInfo> infoList, out ErrorCodeInfo error)
+        public bool GetOperateLogPager(Guid transactionid, string lognum, string account, DateTime starttime, DateTime endtime, int curpage, int pagesize, out DataSet ds, out ErrorCodeInfo error)
         {
             bool bResult = true;
             error = new ErrorCodeInfo();
-            infoList = new List<LogInfo>();
+            ds = new DataSet();
             string strError = string.Empty;
             string paramstr = string.Empty;
             paramstr += "curpage:" + curpage;
@@ -130,17 +140,22 @@ namespace Provider
             try
             {
                 CParameters paras = new CParameters();
-                SqlParameter paraCurPage = new SqlParameter("@Curpage", curpage);
-                SqlParameter paraPageSize = new SqlParameter("@Pagesize", pagesize);
-
+                SqlParameter paraLogNum = new SqlParameter("@LogNum", "%" + lognum + "%");
+                SqlParameter paraAccount = new SqlParameter("@Account", "%" + account + "%");
+                SqlParameter paraStartTime = new SqlParameter("@StartTime", starttime);
+                SqlParameter paraEndTime = new SqlParameter("@EndTime", endtime);
+                SqlParameter paraCurPage = new SqlParameter("@CurPage", curpage);
+                SqlParameter paraPageSize = new SqlParameter("@PageSize", pagesize);
+                paras.Add(paraLogNum);
+                paras.Add(paraAccount);
+                paras.Add(paraStartTime);
+                paras.Add(paraEndTime);
                 paras.Add(paraCurPage);
                 paras.Add(paraPageSize);
 
                 CBaseDB _db = new CBaseDB(Conntection.strConnection);
                 do
                 {
-                    //int iResult = 0;
-                    DataSet ds = new DataSet();
                     if (!_db.ExcuteByTransaction(paras, "dbo.[prc_GetOperateLogPager]", out ds, out strError))
                     {
                         strError = "prc_GetOperateLogPager数据库执行失败,Error:" + strError;
@@ -148,22 +163,6 @@ namespace Provider
                         error.Code = ErrorCode.SQLException;
                         bResult = false;
                         break;
-                    }
-                    else
-                    {
-                        if (ds.Tables.Count > 0)
-                        {
-                            foreach (DataRow dr in ds.Tables[0].Rows)
-                            {
-                                LogInfo info = new LogInfo();
-                                info.ID = Convert.ToInt32(dr["ID"]);
-                                info.LogNum = Convert.ToString(dr["LogNum"]);
-                                info.OperateLog = Convert.ToString(dr["OperateLog"]);
-                                info.OperateType = Convert.ToString(dr["OperateType"]);
-                                info.OperateTime = Convert.ToDateTime(dr["OperateTime"]);
-                                infoList.Add(info);
-                            }
-                        }
                     }
                 } while (false);
             }

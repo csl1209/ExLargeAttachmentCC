@@ -51,11 +51,11 @@ namespace Manager
                 Log4netHelper.Error("AddSysAdmin Exception：" + ex.ToString());
                 bResult = false;
             }
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info);
             return bResult;
         }
 
-        public bool DeleteSysAdmin(Guid transactionid, string strOperatorAccount, int adminID, out string strJsonResult)
+        public bool DeleteSysAdmin(Guid transactionid, string strOperatorAccount, string deleteAccount, out string strJsonResult)
         {
             bool bResult = true;
             strJsonResult = string.Empty;
@@ -67,7 +67,7 @@ namespace Manager
                 {
                     //参数验证
                     if (string.IsNullOrEmpty(strOperatorAccount)
-                        || string.IsNullOrEmpty(adminID.ToString()))
+                        || string.IsNullOrEmpty(deleteAccount))
                     {
                         error.Code = ErrorCode.JsonRequestEmpty;
                         bResult = false;
@@ -75,7 +75,7 @@ namespace Manager
                     }
 
                     AdminDBProvider provider = new AdminDBProvider();
-                    if (!provider.DeleteAdmin(transactionid, adminID, out error))
+                    if (!provider.DeleteAdmin(transactionid, deleteAccount, out error))
                     {
                         bResult = false;
                         break;
@@ -89,7 +89,7 @@ namespace Manager
                 Log4netHelper.Error("DeleteSysAdmin Exception：" + ex.ToString());
                 bResult = false;
             }
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info);
             return bResult;
         }
 
@@ -143,7 +143,7 @@ namespace Manager
                 bResult = false;
             }
 
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info, Dictionary);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info, Dictionary);
             return bResult;
         }
 
@@ -185,7 +185,7 @@ namespace Manager
                 bResult = false;
             }
 
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info, json);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info, json);
             return bResult;
         }
 
@@ -194,6 +194,7 @@ namespace Manager
             bool bResult = true;
             strJsonResult = string.Empty;
             ErrorCodeInfo error = new ErrorCodeInfo();
+            Dictionary<string, object> Dictionary = new Dictionary<string, object>();
 
             try
             {
@@ -219,6 +220,9 @@ namespace Manager
                         bResult = false;
                         break;
                     }
+
+                    Dictionary.Add("useraccount", info.UserAccount);
+
                 } while (false);
             }
             catch (Exception ex)
@@ -228,7 +232,7 @@ namespace Manager
                 bResult = false;
             }
 
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info, Dictionary);
             return bResult;
         }
     }

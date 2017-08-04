@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Provider;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Manager
 {
     public class OperateLogManager
     {
-        public bool GetOperateLogCount(Guid transactionid, string strOperatorAccount, int pagesize, out string strJsonResult)
+        public bool GetOperateLogCount(Guid transactionid, string strOperatorAccount, string lognum, string account, DateTime starttime, DateTime endtime, int pagesize, out string strJsonResult)
         {
             bool bResult = true;
             strJsonResult = string.Empty;
@@ -34,7 +35,7 @@ namespace Manager
 
                     int totlecount = 0;
                     OperateLogDBProvider provider = new OperateLogDBProvider();
-                    if (!provider.GetOperateLogCount(transactionid, out totlecount, out error))
+                    if (!provider.GetOperateLogCount(transactionid, lognum, account, starttime, endtime, out totlecount, out error))
                     {
                         bResult = false;
                         break;
@@ -62,17 +63,17 @@ namespace Manager
                 bResult = false;
             }
 
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info, Dictionary);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info, Dictionary);
             return bResult;
         }
 
-        public bool GetOperateLogPager(Guid transactionid, string strOperatorAccount, int pagesize, int curpage, out string strJsonResult)
+        public bool GetOperateLogPager(Guid transactionid, string strOperatorAccount, string lognum, string account, DateTime starttime, DateTime endtime, int curpage, int pagesize, out string strJsonResult)
         {
             bool bResult = true;
             strJsonResult = string.Empty;
             ErrorCodeInfo error = new ErrorCodeInfo();
             List<LogInfo> infoList = new List<LogInfo>();
-            string json = string.Empty;
+            DataSet ds = new DataSet();
             try
             {
                 do
@@ -87,14 +88,12 @@ namespace Manager
                     }
 
                     OperateLogDBProvider provider = new OperateLogDBProvider();
-                    if (!provider.GetOperateLogPager(transactionid, curpage, pagesize, out infoList, out error))
+                    if (!provider.GetOperateLogPager(transactionid, lognum, account, starttime, endtime, curpage, pagesize, out ds, out error))
                     {
                         bResult = false;
                         break;
                     }
-
-                    json = JsonConvert.SerializeObject(infoList);
-
+                    
                 } while (false);
             }
             catch (Exception ex)
@@ -104,7 +103,7 @@ namespace Manager
                 bResult = false;
             }
 
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info, json);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info, ds);
             return bResult;
         }
     }

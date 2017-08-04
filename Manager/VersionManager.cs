@@ -46,7 +46,7 @@ namespace Manager
                 Log4netHelper.Error("AddVersion Exception：" + ex.ToString());
                 bResult = false;
             }
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info);
             return bResult;
         }
 
@@ -83,7 +83,7 @@ namespace Manager
                 Log4netHelper.Error("EnableVersion Exception：" + ex.ToString());
                 bResult = false;
             }
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info);
             return bResult;
         }
 
@@ -120,7 +120,7 @@ namespace Manager
                 Log4netHelper.Error("DisableVersion Exception：" + ex.ToString());
                 bResult = false;
             }
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info);
             return bResult;
         }
 
@@ -157,7 +157,7 @@ namespace Manager
                 Log4netHelper.Error("DeleteVersion Exception：" + ex.ToString());
                 bResult = false;
             }
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info);
             return bResult;
         }
 
@@ -211,7 +211,7 @@ namespace Manager
                 bResult = false;
             }
 
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info, Dictionary);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info, Dictionary);
             return bResult;
         }
 
@@ -253,7 +253,7 @@ namespace Manager
                 bResult = false;
             }
 
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info, json);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info, json);
             return bResult;
         }
 
@@ -298,7 +298,7 @@ namespace Manager
                 bResult = false;
             }
 
-            strJsonResult = JsonHelper.ReturnstrResult(bResult, error.Info, json);
+            strJsonResult = JsonHelper.ReturnstrJson(bResult, error.Info, json);
             return bResult;
         }
     }

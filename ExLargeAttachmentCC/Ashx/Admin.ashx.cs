@@ -32,7 +32,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strOp))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
                 switch (strOp)
@@ -71,7 +71,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -79,7 +79,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("AddSysAdmin" + Convert.ToString(error.Code));
                     break;
                 }
@@ -88,21 +88,29 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
-                AdminInfo info = JsonHelper.FromJsonTo<AdminInfo>(strJsonPara);
-                if (info == null)
+
+                string UserAccount = Convert.ToString(ds.Tables[0].Rows[0]["UserAccount"]);
+                if (string.IsNullOrEmpty(UserAccount.Trim()))
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
-                    Log4netHelper.Info("AddSysAdmin" + Convert.ToString(error.Code));
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
+                    break;
+                }
+
+                string Password = Convert.ToString(ds.Tables[0].Rows[0]["Password"]);
+                if (string.IsNullOrEmpty(Password.Trim()))
+                {
+                    error.Code = ErrorCode.JsonRequestIllegal;
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
                 AdminManager manage = new AdminManager();
-                manage.AddSysAdmin(transactionid, strAccount, info.UserAccount, info.Password, out strJsonResult);
+                manage.AddSysAdmin(transactionid, strAccount, UserAccount, Password, out strJsonResult);
             } while (false);
             return strJsonResult;
         }
@@ -119,7 +127,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -127,8 +135,8 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
-                    Log4netHelper.Info("AddSysAdmin" + Convert.ToString(error.Code));
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
+                    Log4netHelper.Info("DeleteSysAdmin" + Convert.ToString(error.Code));
                     break;
                 }
 
@@ -136,14 +144,22 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
-                int adminID = Convert.ToInt32(ds.Tables[0].Rows[0]["adminID"]);
+                string deleteAccount = Convert.ToString(ds.Tables[0].Rows[0]["adminID"]);
+
+                if (strAccount == deleteAccount)
+                {
+                    error.Code = ErrorCode.DeleteAccountIsLoginAccount;
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
+                    break;
+                }
 
                 AdminManager manage = new AdminManager();
-                manage.DeleteSysAdmin(transactionid, strAccount, adminID, out strJsonResult);
+                manage.DeleteSysAdmin(transactionid, strAccount, deleteAccount, out strJsonResult);
+
             } while (false);
             return strJsonResult;
         }
@@ -160,7 +176,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -168,7 +184,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("GetAdminCount" + Convert.ToString(error.Code));
                     break;
                 }
@@ -177,7 +193,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -201,7 +217,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -209,7 +225,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("GetAdminPager" + Convert.ToString(error.Code));
                     break;
                 }
@@ -218,7 +234,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -246,7 +262,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -254,22 +270,22 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("Login" + Convert.ToString(error.Code));
                     break;
                 }
 
-                string strAccount = Convert.ToString(ds.Tables[0].Rows[0]["account"]);
-                string strPassword = Convert.ToString(ds.Tables[0].Rows[0]["password"]);
+                string strAccount = Convert.ToString(ds.Tables[0].Rows[0]["name"]);
+                string strPassword = Convert.ToString(ds.Tables[0].Rows[0]["psd"]);
 
                 if (string.IsNullOrEmpty(strAccount) || string.IsNullOrEmpty(strPassword))
                 {
                     error.Code = ErrorCode.AccountOrPasswordError;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("Login" + Convert.ToString(error.Code));
                     break;
                 }
-
+                
                 AdminManager manage = new AdminManager();
                 manage.Login(transactionid, strAccount, strPassword, out strJsonResult);
 

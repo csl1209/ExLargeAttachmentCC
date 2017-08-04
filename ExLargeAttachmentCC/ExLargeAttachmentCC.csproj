@@ -39,8 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common">
-      <HintPath>..\..\..\..\BetterNext\BetterHoster\dll\Common.dll</HintPath>
+    <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
@@ -61,10 +62,129 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin.aspx" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\jquery\images\close.jpg" />
+    <Content Include="css\jquery\images\dateArrows.png" />
+    <Content Include="css\jquery\images\pboverlay.png" />
+    <Content Include="css\jquery\images\slider.png" />
+    <Content Include="css\jquery\images\ui-bg_flat_0_aaaaaa_5F40x100.png" />
+    <Content Include="css\jquery\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="css\jquery\images\ui-icons_222222_5F256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_2e83ff_5F256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_444444_256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_454545_5F256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_555555_256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_777620_256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_777777_256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_888888_5F256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_cd0a0a_5F256x240.png" />
+    <Content Include="css\jquery\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\jquery\jquery-ui-timepicker-addon.css" />
+    <Content Include="css\jquery\jquery-ui.min.css" />
+    <Content Include="css\jquery\jquery-ui.min_cs.css" />
+    <Content Include="css\jquery\ui.css" />
+    <Content Include="css\style.css" />
+    <Content Include="ExLAManager.aspx" />
+    <Content Include="imgs\activeGroup.png" />
+    <Content Include="imgs\checkbox-checked.png" />
+    <Content Include="imgs\checkbox-nomal.png" />
+    <Content Include="imgs\colorbar-01.png" />
+    <Content Include="imgs\del.png" />
+    <Content Include="imgs\edit.png" />
+    <Content Include="imgs\Icon_Code.png" />
+    <Content Include="imgs\Icon_Password.png" />
+    <Content Include="imgs\Icon_Profile.png" />
+    <Content Include="imgs\icon_user.png" />
+    <Content Include="imgs\loading.gif" />
+    <Content Include="imgs\logo.jpg" />
+    <Content Include="imgs\logo_new.png" />
+    <Content Include="imgs\ou.png" />
+    <Content Include="imgs\page_loading.gif" />
+    <Content Include="imgs\Profile.png" />
+    <Content Include="imgs\refresh.png" />
+    <Content Include="imgs\setup.png" />
+    <Content Include="imgs\sort_down.png" />
+    <Content Include="imgs\sort_first.png" />
+    <Content Include="imgs\sort_last.png" />
+    <Content Include="imgs\sort_up.png" />
+    <Content Include="imgs\tree_group.png" />
+    <Content Include="imgs\tree_user.png" />
+    <Content Include="imgs\u1.png" />
+    <Content Include="imgs\u32_line.png" />
+    <Content Include="imgs\u81_line.png" />
+    <Content Include="JS\ADManage\ADActiveGroup.js" />
+    <Content Include="JS\ADManage\ADGroup.js" />
+    <Content Include="JS\ADManage\ADManageInit.js" />
+    <Content Include="JS\ADManage\ADOU.js" />
+    <Content Include="JS\ADManage\ADUser.js" />
+    <Content Include="JS\Admin\Admin.js" />
+    <Content Include="JS\bootstrap.min.js" />
+    <Content Include="JS\checkCode.js" />
+    <Content Include="JS\common.js" />
+    <Content Include="JS\ExchangeAudit\ExchangeAudit.js" />
+    <Content Include="JS\jquery-1.11.1.min.js" />
+    <Content Include="JS\jquery.min.js" />
+    <Content Include="JS\Log\Log.js" />
+    <Content Include="JS\My97DatePicker\calendar.js" />
+    <Content Include="JS\My97DatePicker\lang\en.js" />
+    <Content Include="JS\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="JS\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="JS\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="JS\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="JS\My97DatePicker\skin\default\img.gif" />
+    <Content Include="JS\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="JS\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="JS\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="JS\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="JS\My97DatePicker\WdatePicker.js" />
+    <Content Include="JS\My97DatePicker\开发包\lang\en.js" />
+    <Content Include="JS\My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="JS\My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="JS\My97DatePicker\开发包\readme.txt" />
+    <Content Include="JS\My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="JS\My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="JS\My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="JS\My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="JS\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="JS\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="JS\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="JS\plugins\bootstrap\bootstrap-paginator.js" />
+    <Content Include="JS\plugins\datatables\constant.js" />
+    <Content Include="JS\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="JS\plugins\datatables\zh_CN.txt" />
+    <Content Include="JS\plugins\jquery\images\ui-icons_444444_256x240.png" />
+    <Content Include="JS\plugins\jquery\images\ui-icons_555555_256x240.png" />
+    <Content Include="JS\plugins\jquery\images\ui-icons_777620_256x240.png" />
+    <Content Include="JS\plugins\jquery\images\ui-icons_777777_256x240.png" />
+    <Content Include="JS\plugins\jquery\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="JS\plugins\jquery\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="JS\plugins\jquery\jquery-ui-timepicker-addon.js" />
+    <Content Include="JS\plugins\jquery\jquery-ui-timepicker-zh-CN.js" />
+    <Content Include="JS\plugins\jquery\jquery-ui.min.js" />
+    <Content Include="JS\plugins\jquery\jquery.min.js" />
+    <Content Include="JS\plugins\Paginate\css\style.css" />
+    <Content Include="JS\plugins\Paginate\jquery.paginate.js" />
+    <Content Include="JS\pop\jquery.reveal.js" />
+    <Content Include="JS\pop\modal-gloss.png" />
+    <Content Include="JS\pop\reveal.css" />
+    <Content Include="JS\table\mmGrid.css" />
+    <Content Include="JS\table\mmGrid.js" />
+    <Content Include="JS\table\mmPaginator.css" />
+    <Content Include="JS\table\mmPaginator.js" />
+    <Content Include="Log.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Ashx\Admin.ashx.cs">
       <DependentUpon>Admin.ashx</DependentUpon>
     </Compile>
@@ -74,12 +194,26 @@
     <Compile Include="Ashx\Version.ashx.cs">
       <DependentUpon>Version.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ExLAManager.aspx.cs">
+      <DependentUpon>ExLAManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExLAManager.aspx.designer.cs">
+      <DependentUpon>ExLAManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Head.Master.cs">
       <DependentUpon>Head.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Head.Master.designer.cs">
       <DependentUpon>Head.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Log.aspx.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Log.aspx.designer.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -95,6 +229,8 @@
     <Content Include="Ashx\Version.ashx" />
     <Content Include="Ashx\Admin.ashx" />
     <Content Include="Ashx\Log.ashx" />
+    <Content Include="css\jquery\Descr.WD3" />
+    <Content Include="css\jquery\images\Descr.WD3" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

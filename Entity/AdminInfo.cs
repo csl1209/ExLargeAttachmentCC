@@ -8,8 +8,8 @@ namespace Entity
 {
     public class AdminInfo
     {
-        private int _ID = 0;
-        public int ID
+        private Guid _ID = Guid.Empty;
+        public Guid ID
         {
             get { return _ID; }
             set { _ID = value; }

@@ -71,7 +71,7 @@ namespace Provider
                             if (ds.Tables[1].Rows.Count > 0)
                             {
                                 DataRow sdr = ds.Tables[1].Rows[0];
-                                info.ID = Convert.ToInt32(sdr[0]);
+                                info.ID = Guid.Parse(Convert.ToString(sdr[0]));
                             }
                         }
                     }
@@ -86,20 +86,20 @@ namespace Provider
             return bResult;
         }
 
-        public bool DeleteAdmin(Guid transactionid, int adminID, out ErrorCodeInfo error)
+        public bool DeleteAdmin(Guid transactionid, string deleteAccount, out ErrorCodeInfo error)
         {
             bool bResult = true;
             error = new ErrorCodeInfo();
             string strError = string.Empty;
             string paramstr = string.Empty;
-            paramstr += "adminID:" + adminID;
+            paramstr += "deleteAccount:" + deleteAccount;
 
             try
             {
                 CParameters paras = new CParameters();
-                SqlParameter paraAdminID = new SqlParameter("@AdminID", adminID);
+                SqlParameter paraUserAccount = new SqlParameter("@UserAccount", deleteAccount);
 
-                paras.Add(paraAdminID);
+                paras.Add(paraUserAccount);
 
                 CBaseDB _db = new CBaseDB(Conntection.strConnection);
                 do
@@ -223,7 +223,7 @@ namespace Provider
                             foreach (DataRow dr in ds.Tables[0].Rows)
                             {
                                 AdminInfo info = new AdminInfo();
-                                info.ID = Convert.ToInt32(dr["ID"]);
+                                info.ID = Guid.Parse(Convert.ToString(dr["ID"]));
                                 info.UserAccount = Convert.ToString(dr["UserAccount"]);
                                 info.Status = (UserState)Convert.ToInt32(dr["Status"]);
                                 infoList.Add(info);

@@ -32,7 +32,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strOp))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
                 switch (strOp)
@@ -61,7 +61,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -69,7 +69,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("GetLogCount" + Convert.ToString(error.Code));
                     break;
                 }
@@ -78,14 +78,30 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
+                string sLogNum = Convert.ToString(ds.Tables[0].Rows[0]["lognum"]);
+                string sAccount = Convert.ToString(ds.Tables[0].Rows[0]["account"]);
                 int pagesize = Convert.ToInt32(ds.Tables[0].Rows[0]["pagesize"]);
 
+                string startstr = Convert.ToString(ds.Tables[0].Rows[0]["start"]);
+                DateTime sscreate = new DateTime(2000, 1, 1);
+                if (startstr != string.Empty)
+                {
+                    sscreate = Convert.ToDateTime(startstr).Date;
+                }
+
+                string endstr = Convert.ToString(ds.Tables[0].Rows[0]["end"]);
+                DateTime secreate = DateTime.MaxValue;
+                if (endstr != string.Empty)
+                {
+                    secreate = Convert.ToDateTime(endstr).Date.AddDays(1).AddSeconds(-1);
+                }
+
                 OperateLogManager manage = new OperateLogManager();
-                manage.GetOperateLogCount(transactionid, strAccount, pagesize, out strJsonResult);
+                manage.GetOperateLogCount(transactionid, strAccount, sLogNum, sAccount, sscreate, secreate, pagesize, out strJsonResult);
 
 
             } while (false);
@@ -104,7 +120,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -112,7 +128,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("GetLogPager" + Convert.ToString(error.Code));
                     break;
                 }
@@ -121,16 +137,31 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
+                string sLogNum = Convert.ToString(ds.Tables[0].Rows[0]["lognum"]);
+                string sAccount = Convert.ToString(ds.Tables[0].Rows[0]["account"]);
+                int curpage = Convert.ToInt32(ds.Tables[0].Rows[0]["curpage"]);
                 int pagesize = Convert.ToInt32(ds.Tables[0].Rows[0]["pagesize"]);
 
-                int curpage = Convert.ToInt32(ds.Tables[0].Rows[0]["curpage"]);
+                string startstr = Convert.ToString(ds.Tables[0].Rows[0]["start"]);
+                DateTime sscreate = new DateTime(2000, 1, 1);
+                if (startstr != string.Empty)
+                {
+                    sscreate = Convert.ToDateTime(startstr).Date;
+                }
+
+                string endstr = Convert.ToString(ds.Tables[0].Rows[0]["end"]);
+                DateTime secreate = DateTime.MaxValue;
+                if (endstr != string.Empty)
+                {
+                    secreate = Convert.ToDateTime(endstr).Date.AddDays(1).AddSeconds(-1);
+                }
 
                 OperateLogManager manage = new OperateLogManager();
-                manage.GetOperateLogPager(transactionid, strAccount, pagesize, curpage, out strJsonResult);
+                manage.GetOperateLogPager(transactionid, strAccount, sLogNum, sAccount, sscreate, secreate, curpage, pagesize, out strJsonResult);
 
 
             } while (false);

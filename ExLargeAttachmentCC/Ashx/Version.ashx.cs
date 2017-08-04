@@ -33,7 +33,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strOp))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
                 switch (strOp)
@@ -78,7 +78,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -86,7 +86,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("AddVersion" + Convert.ToString(error.Code));
                     break;
                 }
@@ -95,7 +95,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -103,7 +103,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (info == null)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("AddVersion" + Convert.ToString(error.Code));
                     break;
                 }
@@ -157,7 +157,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -165,7 +165,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("EnableVersion" + Convert.ToString(error.Code));
                     break;
                 }
@@ -174,7 +174,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -200,7 +200,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -208,7 +208,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("DisableVersion" + Convert.ToString(error.Code));
                     break;
                 }
@@ -217,7 +217,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -243,7 +243,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -251,7 +251,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("DeleteVersion" + Convert.ToString(error.Code));
                     break;
                 }
@@ -260,7 +260,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -286,7 +286,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -294,7 +294,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("GetVersionCount" + Convert.ToString(error.Code));
                     break;
                 }
@@ -303,7 +303,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -329,7 +329,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -337,7 +337,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("GetVersionPager" + Convert.ToString(error.Code));
                     break;
                 }
@@ -346,7 +346,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strAccount.Trim()))
                 {
                     error.Code = ErrorCode.AdminIsNotExist;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -374,7 +374,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (string.IsNullOrEmpty(strJsonPara))
                 {
                     error.Code = ErrorCode.JsonRequestEmpty;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     break;
                 }
 
@@ -382,7 +382,7 @@ namespace ExLargeAttachmentCC.Ashx
                 if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     error.Code = ErrorCode.JsonRequestIllegal;
-                    strJsonResult = JsonHelper.ReturnstrResult(false, error.Info);
+                    strJsonResult = JsonHelper.ReturnstrJson(false, error.Info);
                     Log4netHelper.Info("CheckVersion" + Convert.ToString(error.Code));
                     break;
                 }

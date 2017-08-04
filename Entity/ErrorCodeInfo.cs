@@ -66,6 +66,9 @@ namespace Entity
                     case ErrorCode.AdminIsNotExist:
                         codeInfo = "管理员不存在或超时！";
                         break;
+                    case ErrorCode.DeleteAccountIsLoginAccount:
+                        codeInfo = "不能删除当前登录管理员！";
+                        break;
                     default:
                         break;
                 }
@@ -89,5 +92,6 @@ namespace Entity
         AccountIsExist = 1003,
         AccountOrPasswordError = 1004,
         AdminIsNotExist = 1005,
+        DeleteAccountIsLoginAccount = 1006,
     }
 }
